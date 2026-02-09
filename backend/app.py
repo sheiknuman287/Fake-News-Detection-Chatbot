@@ -1,13 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 # Load model and vectorizer
-model = joblib.load("../model/fake_news_model.pkl")
-vectorizer = joblib.load("../model/tfidf_vectorizer.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "..", "model")
+
+model = joblib.load(os.path.join(MODEL_DIR, "fake_news_model.pkl"))
+vectorizer = joblib.load(os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl"))
 
 @app.route("/")
 def home():
