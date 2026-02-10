@@ -1,3 +1,5 @@
+const API_URL = "https://fake-news-detection-chatbot.onrender.com/predict";
+
 function checkNews() {
     const text = document.getElementById("newsInput").value;
     const resultDiv = document.getElementById("result");
@@ -9,12 +11,12 @@ function checkNews() {
 
     resultDiv.innerHTML = "⏳ Checking...";
 
-    fetch("http://127.0.0.1:5000/predict", {
+    fetch(API_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ text: text })
+        body: JSON.stringify({ text })
     })
     .then(response => response.json())
     .then(data => {
